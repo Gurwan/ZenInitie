@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+
+<project name="ZenInitie" default="compile" basedir=".">
+
+    <description>
+        BuildFile du projet Zen l'Initié
+    </description>
+
+    <!-- Directories used -->
+    <property name="src" location="src"/>
+    <property name="build" location="build"/>
+    <property name="exe" location="dist"/>
+    <property name="doc" location="doc"/>
+    <property name="game" location="ZenGame/data"/>
+
+    <target name="init" description="Create the build dir">
+        <!-- Allows to recover the date of the compilation -->
+        <tstamp/>
+        <!-- Create the build directory where the .class files will be stored -->
+        <mkdir dir="${build}"/>
+        <echo>
+            Fichier build crée
+        </echo>
+    </target>
+
+    <target name="compile" depends="init" description="Compile the classes">
+        <!-- Compile  the program such as the command line : javac -d ./build ./src/* -->
+        <javac srcdir="${src}" destdir="${build}" includeantruntime="false"/>
+    </target>
+
+    <target name="javadoc" description="Generate the javadoc of classes">
+        <!-- Create the build directory where the javadoc will be stored -->
+        <mkdir dir="${doc}"/>
+        <!-- Generate the javadoc -->
+        <javadoc destdir="${doc}" sourcepath="${src}" author="true"/>
+        <echo>
+            Javadoc générée
+        </echo>
+    </target>
+
+    <property name="test.src" value="tests"/>
+    <property name="test.build" value="build/tests"/>
+
+    <path id="classpath_test">
+        <pathelement location="lib/junit-4.12.jar"/>
+        <pathelement location="lib/hamcrest-core-1.3.jar"/>
+        <pathelement location="${build}"/>
+    </path>
+
+    <target name="test-compile" depends="compile">
+        <mkdir dir="${test.build}"/>
+        <javac srcdir="${test.src}" destdir="${test.build}" includeantruntime="false">
+            <classpath refid="classpath_test" />
+        </javac>
+    </target>
+
+    <target name="test-execute" depends="test-compile">
+        <junit fork="true" haltonfailure="yes" printsummary="on">
+            <classpath>
+                <path refid="classpath_test"/>
+                <pathelement location="${test.build}"/>
+            </classpath>
+
+            <formatter type="brief" usefile="false" />
+
+            <batchtest>
+                <fileset dir="${test.src}"  includes="**/*Test*.class"/>
+            </batchtest>
+
+        </junit>
+    </target>
+
+    <target name="jar" depends="compile" description="Create the jar of the game">
+        <!-- Create the exe directory where the jar will be -->
+        <mkdir dir="${exe}"/>
+        <!-- Generate the jar of the game -->
+        <jar destfile="${exe}/ZenInitie_${DSTAMP}.jar" basedir="${build}">
+            <manifest>
+                <attribute name="Main-Class" value="LaunchGame"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="run" depends="jar" description="Execute the jar of the game">
+        <!-- Launch the game -->
+        <java jar="${exe}/ZenInitie_${DSTAMP}.jar" fork="true"/>
+    </target>
+
+    <target name="clean" description="Delete directories">
+        <delete dir="${doc}"/>
+        <delete dir="${build}"/>
+        <delete dir="${exe}"/>
+        <delete dir="${game}"/>
+
+        <echo>
+            Fichiers supprimés
+        </echo>
+    </target>
+
+</project>
