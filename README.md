@@ -59,6 +59,7 @@
   <li>
     The manuel_utilisateur pdf contains everything you need to know to play the game.
   </li>
+ </ul>
   
 <h3> How to install the game ? </h3>
 
