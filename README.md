@@ -60,6 +60,33 @@
     The manuel_utilisateur pdf contains everything you need to know to play the game.
   </li>
  </ul>
+ 
+<hr> </hr>
+ 
+<h3> Screenshots </h3>
+
+<p align="center">
+  <img src="https://github.com/Gurwan/ZenInitie/blob/master/screen/mainView.png" width="850" style="max-width:100%;"><br>
+  Visual 1 - Home page
+</p>
+
+<br>
+
+
+<p align="center">
+  <img src="https://github.com/Gurwan/ZenInitie/blob/master/screen/interfaceJeu.png" width="850" style="max-width:100%;"><br>
+  Visual 2 - In Game page
+</p>
+
+<br>
+
+
+<p align="center">
+  <img src="https://github.com/Gurwan/ZenInitie/blob/master/screen/interfaceSauvegarde.png" width="850" style="max-width:100%;"><br>
+  Visual 3 - Save page
+</p>
+
+<hr> </hr>
   
 <h3> How to install the game ? </h3>
 
